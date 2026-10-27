@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Song Meiqi | CMF 设计师</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300&family=Noto+Serif+SC:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+/* === 莫奈色板（改这里可整体换色调）=== */
+:root{
+  --cream:      #F7F3EC;
+  --mist:       #EDF0EE;
+  --wisteria:   #C9BFDB;
+  --lavender:   #A99BC4;
+  --pond:       #7FA895;
+  --deep-green: #5C8B78;
+  --sky:        #A8C0D6;
+  --rose:       #E5C6CC;
+  --ink:        #4A4A52;
+  --ink-soft:   #7C7B85;
+  --line:       #E0DAD2;
+  --radius:     22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Noto Serif SC',serif;
+  color:var(--ink);
+  background:
+    radial-gradient(1200px 600px at 15% 0%, rgba(201,191,219,.38), transparent 60%),
+    radial-gradient(900px 500px at 85% 20%, rgba(168,192,214,.35), transparent 60%),
+    radial-gradient(1000px 700px at 50% 100%, rgba(127,168,149,.22), transparent 65%),
+    var(--cream);
+  background-attachment:fixed;
+  line-height:1.9;
+  font-size:16px;
+}
+h1,h2,h3{font-family:'Cormorant Garamond','Noto Serif SC',serif;font-weight:500;letter-spacing:.02em}
+a{color:var(--deep-green);text-decoration:none;border-bottom:1px solid rgba(92,139,120,.3)}
+a:hover{color:var(--lavender);border-color:var(--lavender)}
+ 
+/* === 导航 === */
+nav{
+  position:sticky;top:0;z-index:99;
+  backdrop-filter:blur(14px);
+  background:rgba(247,243,236,.78);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{max-width:1080px;margin:0 auto;padding:16px 24px;
+  display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.12em}
+.nav-links{display:flex;flex-wrap:wrap;gap:20px;font-size:14.5px}
+.nav-links a{border:none;color:var(--ink-soft)}
+.nav-links a:hover{color:var(--deep-green)}
+ 
+/* === 区块通用 === */
+section{max-width:1080px;margin:0 auto;padding:84px 24px}
+.sec-title{font-size:34px;margin-bottom:8px}
+.sec-title em{font-style:italic;color:var(--lavender)}
+.sec-sub{font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:42px}
+.card{
+  background:rgba(255,255,255,.58);
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:var(--radius);
+  padding:30px 32px;
+  box-shadow:0 18px 48px rgba(120,120,140,.07);
+  backdrop-filter:blur(6px);
+  margin-bottom:22px;
+}
+.muted{color:var(--ink-soft);font-size:14.5px}
+.tag{
+  display:inline-block;padding:5px 14px;margin:4px 6px 4px 0;
+  border-radius:999px;font-size:13.5px;
+  background:rgba(168,192,214,.22);
+  border:1px solid rgba(168,192,214,.45);
+  color:#4A5A6B;
+}
+.tag.g{background:rgba(127,168,149,.2);border-color:rgba(127,168,149,.45);color:#3E6555}
+.tag.p{background:rgba(201,191,219,.28);border-color:rgba(201,191,219,.55);color:#5F5279}
+ 
+/* === 首页头部 === */
+#hero{display:flex;gap:48px;align-items:center;flex-wrap:wrap;padding-top:110px}
+.hero-photo{
+  width:210px;height:210px;flex:0 0 auto;border-radius:50%;
+  object-fit:cover;
+  border:6px solid rgba(255,255,255,.85);
+  box-shadow:0 20px 50px rgba(140,130,160,.22);
+  background:linear-gradient(135deg,var(--wisteria),var(--sky));
+}
+.hero-photo.placeholder{display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:13px;letter-spacing:.1em;text-align:center}
+.hero-name{font-size:52px;line-height:1.15}
+.hero-tagline{font-size:17px;color:var(--ink-soft);margin:10px 0 6px}
+.hero-target{font-size:15px;color:var(--deep-green);margin-bottom:22px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-size:14.5px;color:var(--ink-soft)}
+.hero-meta span::before{content:"· ";color:var(--pond)}
+ 
+/* === 时间线 === */
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:1.5px;
+  background:linear-gradient(var(--wisteria),var(--pond),transparent)}
+.tl-item{position:relative;margin-bottom:34px}
+.tl-item:last-child{margin-bottom:0}
+.tl-item::before{content:"";position:absolute;left:-25px;top:11px;
+  width:9px;height:9px;border-radius:50%;background:var(--pond);
+  box-shadow:0 0 0 4px rgba(127,168,149,.16)}
+.tl-head{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:baseline}
+.tl-title{font-size:19px}
+.tl-time{font-size:13.5px;color:var(--ink-soft);font-style:italic}
+ 
+/* === 作品集 === */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px}
+.work{background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.9);
+  border-radius:var(--radius);overflow:hidden;
+  box-shadow:0 16px 40px rgba(120,120,140,.07)}
+.work-img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;
+  background:linear-gradient(135deg,var(--mist),var(--wisteria),var(--sky))}
+.work-body{padding:22px 24px 26px}
+.work-title{font-size:20px;margin-bottom:4px}
+.work-time{font-size:13px;color:var(--ink-soft);font-style:italic;margin-bottom:12px}
+.work-role{font-size:13.5px;color:var(--deep-green);margin-bottom:10px}
+.work-desc{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+ 
+/* === 技能 === */
+.skill-row{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.skill-label{flex:0 0 130px;font-size:14.5px}
+.skill-bar{flex:1;height:7px;border-radius:99px;background:rgba(201,191,219,.3);overflow:hidden}
+.skill-fill{height:100%;border-radius:99px;
+  background:linear-gradient(90deg,var(--wisteria),var(--pond))}
+ 
+/* === 博客 === */
+.post{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  padding:18px 0;border-bottom:1px solid var(--line)}
+.post:last-child{border-bottom:none}
+.post-title{font-size:17px}
+.post-date{font-size:13.5px;color:var(--ink-soft);font-style:italic}
+ 
+/* === 联系 === */
+.contact-list{display:flex;flex-wrap:wrap;gap:14px 40px;font-size:15.5px}
+.contact-list div{color:var(--ink-soft)}
+.contact-list b{color:var(--ink);font-weight:400}
+ 
+footer{text-align:center;padding:60px 24px 80px;font-size:13.5px;color:var(--ink-soft)}
+ 
+/* === 交互动效层 === */
+/* 1. 滚动淡入 */
+.reveal{
+  opacity:0;
+  transform:translateY(34px);
+  transition:opacity .9s cubic-bezier(.22,.61,.36,1),
+             transform .9s cubic-bezier(.22,.61,.36,1);
+  will-change:opacity,transform;
+}
+.reveal.is-visible{opacity:1;transform:translateY(0)}
+.reveal.d1{transition-delay:.10s}
+.reveal.d2{transition-delay:.20s}
+.reveal.d3{transition-delay:.30s}
+.reveal.d4{transition-delay:.40s}
+ 
+/* 2. 导航滚动收缩 */
+nav{transition:padding .45s ease, background .45s ease, box-shadow .45s ease}
+nav.scrolled{background:rgba(247,243,236,.62);box-shadow:0 6px 26px rgba(120,120,140,.07)}
+nav.scrolled .nav-inner{padding-top:10px;padding-bottom:10px}
+
+/* 3. 背景光斑呼吸 */
+body::before{
+  content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(38% 32% at 22% 28%, rgba(201,191,219,.30), transparent 70%),
+    radial-gradient(34% 30% at 78% 22%, rgba(168,192,214,.28), transparent 70%),
+    radial-gradient(42% 36% at 58% 76%, rgba(127,168,149,.20), transparent 72%);
+  animation:breathe 22s ease-in-out infinite alternate;
+}
+@keyframes breathe{
+  0%  {opacity:.65; transform:scale(1)    translate(0,0)}
+  50% {opacity:.95; transform:scale(1.06) translate(1.5%,-1.5%)}
+  100%{opacity:.75; transform:scale(1.02) translate(-1.5%,1.5%)}
+}
+ 
+/* 4. 鼠标柔光跟随 */
+.cursor-glow{
+  position:fixed;width:340px;height:340px;border-radius:50%;
+  pointer-events:none;z-index:0;
+  background:radial-gradient(circle, rgba(201,191,219,.20), transparent 68%);
+  transform:translate(-50%,-50%);
+  transition:opacity .5s ease;opacity:0;
+  mix-blend-mode:multiply;
+}
+ 
+/* 5. 卡片悬停柔化 */
+.card,.work{transition:transform .5s cubic-bezier(.22,.61,.36,1),
+                       box-shadow .5s cubic-bezier(.22,.61,.36,1)}
+.card:hover{transform:translateY(-3px);box-shadow:0 24px 56px rgba(120,120,140,.11)}
+ 
+/* 6. 技能条初始宽度为 0，进入视口后生长 */
+.skill-fill{width:0;transition:width 1.3s cubic-bezier(.22,.61,.36,1)}
+ 
+/* 7. 尊重系统"减少动态效果"设置 */
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  body::before{animation:none!important}
+  .cursor-glow{display:none}
+  .card:hover{transform:none}
+  .skill-fill{transition:none!important}
+}
+ 
+/* === 手机端 === */
+@media(max-width:680px){
+  section{padding:60px 20px}
+  #hero{flex-direction:column;text-align:center;gap:28px;padding-top:70px}
+  .hero-name{font-size:38px}
+  .hero-meta{justify-content:center}
+  .sec-title{font-size:27px}
+  .skill-label{flex:0 0 96px;font-size:13.5px}
+  .card{padding:24px 22px}
+}
+</style>
+</head>
+<body>
+ 
+<!-- === 导航 === -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo" id="navLogo">SONG MEIQI</div>
+    <div class="nav-links">
+      <a href=" ">关于我</a >
+      <a href="#works">作品集</a >
+      <a href="#experience">经历</a >
+      <a href="#skills">技能</a >
+      <a href="#blog">博客</a >
+      <a href="#contact">联系我</a >
+    </div>
+  </div>
+</nav>
+ 
+<!-- === 首页头部 === -->
+<section id="hero"></section>
+ 
+<!-- === 关于我 === -->
+<section id="about">
+  <h2 class="sec-title">关于 <em>我</em></h2>
+  <p class="sec-sub">About Me</p >
+  <div id="aboutBox"></div>
+</section>
+ 
+<!-- === 作品集 === -->
+<section id="works">
+  <h2 class="sec-title">作品 <em>集</em></h2>
+  <p class="sec-sub">Selected Works</p >
+  <div class="grid" id="worksGrid"></div>
+</section>
+ 
+<!-- === 实践经历 === -->
+<section id="experience">
+  <h2 class="sec-title">经历</h2>
+  <p class="sec-sub">Experience</p >
+  <div id="expBox"></div>
+</section>
+ 
+<!-- === 技能 === -->
+<section id="skills">
+  <h2 class="sec-title">技能</h2>
+  <p class="sec-sub">Skills</p >
+  <div id="skillsBox"></div>
+</section>
+ 
+<!-- === 博客 === -->
+<section id="blog">
+  <h2 class="sec-title">设计 <em>随笔</em></h2>
+  <p class="sec-sub">Notes</p >
+  <div class="card" id="blogBox"></div>
+</section>
+ 
+<!-- === 联系我 === -->
+<section id="contact">
+  <h2 class="sec-title">联系 <em>我</em></h2>
+  <p class="sec-sub">Contact</p >
+  <div class="card" id="contactBox"></div>
+</section>
+ 
+<footer id="footer"></footer>
+ 
+<script>
+/* ===
+   ★★★★★  【你只需要改下面这一个对象】  ★★★★★
+   以后更新内容，只改这里，其他代码一律不用动。
+   把 null 换成真实内容即可；数组里想加多少项就复制多少项。
+   === */
+const SITE_DATA = {
+ 
+  /* ---------- 1. 基础身份（首页头部）---------- */
+  profile: {
+    name: "Song Meiqi",
+    photo: "images/me.jpg",
+    tagline: "工业设计｜CMF 设计师，专注消费电子质感设计",
+    target: "意向岗位：CMF 设计师",
+    email: "misty8868@qq.com",
+    phone: 19981109900,
+    city: "广东省广州市",
+    footer: "© 2026 Song Meiqi · Designed with Monet palette"
+  },
+ 
+  /* ---------- 2. 关于我 ---------- */
+  about: {
+    intro: "我是华南理工大学2025级工业设计本科生。我对色彩和材质细节比较敏感，喜欢沉下心做研究梳理，看重设计能够真正落地。希望深耕CMF设计，用色彩与材料提升国产消费电子产品的质感。",
+    education: [
+      { school: "华南理工大学", major: "工业设计", period: "2025.09 – 2029.06",
+        courses: "主修核心课程：CMF 色彩体系、材料与工艺、产品设计表达" }
+    ],
+    honors: "奖学金、竞赛获奖、职业规划大赛荣誉等。",
+    campus: "学术科技委员；M.shadow魔术协会成员。"
+  },
+ 
+  /* ---------- 3. 作品集（核心，优先填）---------- */
+  works: [
+    { title: "项目名称", time: "20XX.XX – 20XX.XX",
+      role: "我的角色：CMF 设计 / 配色方案推演",
+      desc: "项目背景 + 目标：一句话说清要解决什么问题。",
+      process: "过程：调研 → 色彩方案推演 → 材料工艺探索 → 打样验证 → 反思",
+      result: "成果：效果图、实物照片、方案文档。",
+      gain: "收获：这段经历让我掌握了……",
+      img: null },
+    { title: "项目名称二", time: "20XX.XX",
+      role: "我的角色", desc: "项目简介",
+      process: "过程内容", result: "成果输出", gain: "收获总结", img: null }
+  ],
+  
+  /* ---------- 4. 实践经历 ---------- */
+  experience: {
+    internship: [
+      { company: "公司名称", role: "岗位", period: "20XX.XX – 20XX.XX",
+        detail: "主要工作内容与产出。" }
+    ],
+    competition: [
+      { name: "参赛项目", result: "取得成果", period: "20XX.XX" }
+    ],
+    research: [
+      { name: "研究课题", detail: "课外调研、个人研究内容。", period: "20XX" }
+    ]
+  },
+ 
+  /* ---------- 5. 技能 ---------- */
+  skills: {
+    professional: ["CMF 色彩体系", "材料工艺", "表面处理", "量产工艺认知", "趋势调研"],
+    software: [                               // level 填 0–100
+      { name: "Rhino",       level: 85 },
+      { name: "Keyshot",     level: 90 },
+      { name: "Photoshop",   level: 80 },
+      { name: "Illustrator", level: 75 },
+      { name: "Figma",       level: 70 },
+      { name: "Office",      level: 85 }
+    ],
+    soft: ["多方协作", "方案落地", "调研分析", "文档输出"],
+    language: "英语 CET-X，可独立阅读外文设计文献。"
+  },
+ 
+  /* ---------- 6. 博客 / 随笔 ---------- */
+  posts: [
+    { title: "文章标题，例如《一次色彩打样的失败记录》", date: "20XX.XX", link: null }
+  ],
+ 
+  /* ---------- 7. 联系我 & 外部链接 ---------- */
+  contact: {
+    links: [
+      { label: "抖音",  url:59409651524},
+      { label: "小红书",  url: 26142176048}
+    ],
+    hobby: "兴趣爱好：色彩研究、风景摄影、阅读、户外运动。"
+  }
+};
+/* === 以上是唯一需要改的地方 === */
+ 
+ 
+/* ---------------- 渲染逻辑（不用改） ---------------- */
+const D = SITE_DATA;
+const esc = s => String(s ?? "");
+ 
+/* 首页头部 */
+document.getElementById('navLogo').textContent = D.profile.name.toUpperCase();
+document.getElementById('hero').innerHTML = `
+  ${D.profile.photo
+      ? `< img class="hero-photo" src="${D.profile.photo}" alt="${esc(D.profile.name)}">`
+      : `<div class="hero-photo placeholder">头像 / 形象照<br>放 images/ 后填路径</div>`}
+  <div>
+    <h1 class="hero-name">${esc(D.profile.name)}</h1>
+    <p class="hero-tagline">${esc(D.profile.tagline)}</p >
+    <p class="hero-target">${esc(D.profile.target)}</p >
+    <div class="hero-meta">
+      ${D.profile.email ? `<span><a href=" ">${esc(D.profile.email)}</a ></span>` : ''}
+      ${D.profile.phone ? `<span>${esc(D.profile.phone)}</span>` : ''}
+      ${D.profile.city  ? `<span>${esc(D.profile.city)}</span>`  : ''}
+    </div>
+  </div>`;
+ 
+/* 关于我 */
+const A = D.about;
+document.getElementById('aboutBox').innerHTML = `
+  <div class="card"><p>${esc(A.intro)}</p ></div>
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:16px">教育经历</h3>
+    <div class="timeline">
+      ${A.education.map(e => `
+        <div class="tl-item">
+          <div class="tl-head">
+            <div class="tl-title">${esc(e.school)} · ${esc(e.major)}</div>
+            <div class="tl-time">${esc(e.period)}</div>
+          </div>
+          <p class="muted">${esc(e.courses)}</p >
+        </div>`).join('')}
+    </div>
+  </div>
+  <div class="card"><h3 class="tl-title" style="margin-bottom:10px">荣誉奖项</h3><p class="muted">${esc(A.honors)}</p ></div>
+  <div class="card"><h3 class="tl-title" style="margin-bottom:10px">校内经历</h3><p class="muted">${esc(A.campus)}</p ></div>`;
+ 
+/* 作品集 */
+document.getElementById('worksGrid').innerHTML = D.works.map(w => `
+  <div class="work">
+    ${w.img ? `< img class="work-img" src="${w.img}" alt="${esc(w.title)}">` : `<div class="work-img"></div>`}
+    <div class="work-body">
+      <div class="work-title">${esc(w.title)}</div>
+      <div class="work-time">${esc(w.time)}</div>
+      <div class="work-role">${esc(w.role)}</div>
+      <div class="work-desc">${esc(w.desc)}</div>
+      <p class="muted" style="margin-bottom:6px"><b style="font-weight:400;color:var(--ink)">过程：</b>${esc(w.process)}</p >
+      <p class="muted" style="margin-bottom:6px"><b style="font-weight:400;color:var(--ink)">成果：</b>${esc(w.result)}</p >
+      <p class="muted"><b style="font-weight:400;color:var(--ink)">收获：</b>${esc(w.gain)}</p >
+    </div>
+  </div>`).join('');
+ 
+/* 经历 */
+const E = D.experience;
+const tl = (arr, tpl) => arr.length
+  ? `<div class="timeline">${arr.map(tpl).join('')}</div>`
+  : `<p class="muted">暂无内容。</p >`;
+document.getElementById('expBox').innerHTML = `
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:16px">实习经历</h3>
+    ${tl(E.internship, i => `
+      <div class="tl-item">
+        <div class="tl-head">
+          <div class="tl-title">${esc(i.company)} · ${esc(i.role)}</div>
+          <div class="tl-time">${esc(i.period)}</div>
+        </div>
+        <p class="muted">${esc(i.detail)}</p >
+      </div>`)}
+  </div>
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:16px">竞赛经历</h3>
+    ${tl(E.competition, c => `
+      <div class="tl-item">
+        <div class="tl-head">
+          <div class="tl-title">${esc(c.name)}</div>
+          <div class="tl-time">${esc(c.period)}</div>
+        </div>
+        <p class="muted">${esc(c.result)}</p >
+      </div>`)}
+  </div>
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:16px">自主研究项目</h3>
+    ${tl(E.research, r => `
+      <div class="tl-item">
+        <div class="tl-head">
+          <div class="tl-title">${esc(r.name)}</div>
+          <div class="tl-time">${esc(r.period)}</div>
+        </div>
+        <p class="muted">${esc(r.detail)}</p >
+      </div>`)}
+  </div>`;
+ 
+/* 技能 */
+const S = D.skills;
+const tagHTML = (arr, cls='') => arr.map(t => `<span class="tag ${cls}">${esc(t)}</span>`).join('');
+document.getElementById('skillsBox').innerHTML = `
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:14px">专业硬技能</h3>
+    ${tagHTML(S.professional,'g')}
+  </div>
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:20px">软件工具</h3>
+    ${S.software.map(s => `
+      <div class="skill-row">
+        <div class="skill-label">${esc(s.name)}</div>
+        <div class="skill-bar"><div class="skill-fill" data-level="${s.level}"></div></div>
+      </div>`).join('')}
+  </div>
+  <div class="card">
+    <h3 class="tl-title" style="margin-bottom:14px">软能力</h3>
+    ${tagHTML(S.soft,'p')}
+    <p class="muted" style="margin-top:16px">${esc(S.language)}</p >
+  </div>`;
+ /* 博客 */
+document.getElementById('blogBox').innerHTML = D.posts.length
+  ? D.posts.map(p => `
+      <div class="post">
+        <div class="post-title">${p.link ? `<a href=" ">${esc(p.title)}</a >` : esc(p.title)}</div>
+        <div class="post-date">${esc(p.date)}</div>
+      </div>`).join('')
+  : `<p class="muted">暂无文章。</p >`;
+ 
+/* 联系 */
+const C = D.contact;
+document.getElementById('contactBox').innerHTML = `
+  <div class="contact-list">
+    ${D.profile.email ? `<div>邮箱：<b>${esc(D.profile.email)}</b></div>` : ''}
+    ${D.profile.phone ? `<div>电话：<b>${esc(D.profile.phone)}</b></div>` : ''}
+    ${D.profile.city  ? `<div>城市：<b>${esc(D.profile.city)}</b></div>`  : ''}
+  </div>
+  <div style="margin-top:22px">
+    ${C.links.filter(l => l.url).map(l => `<a href="${l.url}" target="_blank" rel="noopener" style="margin-right:22px">${esc(l.label)} ↗</a >`).join('')}
+  </div>
+  <p class="muted" style="margin-top:22px">${esc(C.hobby)}</p >`;
+document.getElementById('footer').textContent = D.profile.footer;
+ 
+ 
+/* === 动效逻辑 === */
+(function(){
+  /* --- 1. 自动给各板块打上淡入标记 --- */
+  const revealTargets = [
+    '#hero > div', '#aboutBox .card', '#worksGrid .work',
+    '#expBox .card', '#skillsBox .card', '#blogBox', '#contactBox'
+  ];
+  revealTargets.forEach(sel=>{
+    document.querySelectorAll(sel).forEach((el,i)=>{
+      el.classList.add('reveal');
+      el.classList.add('d' + (i % 4 + 1));
+    });
+  });
+ 
+  /* --- 2. 进入视口时浮现，只触发一次 --- */
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('is-visible');
+        // 技能条：进入视口时才生长到设定宽度
+        e.target.querySelectorAll('.skill-fill').forEach(bar=>{
+          const w = bar.dataset.level;
+          if(w) setTimeout(()=>{ bar.style.width = w + '%'; }, 200);
+        });
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+ 
+  /* --- 3. 导航滚动收缩 --- */
+  const nav = document.querySelector('nav');
+  let ticking = false;
+  window.addEventListener('scroll', ()=>{
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(()=>{
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+      ticking = false;
+    });
+  }, { passive:true });
+ 
+  /* --- 4. 鼠标柔光跟随（触屏设备自动跳过）--- */
+  if(window.matchMedia('(hover:hover)').matches){
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    let gx=0, gy=0, cx=0, cy=0;
+    window.addEventListener('mousemove', e=>{
+      gx=e.clientX; gy=e.clientY; glow.style.opacity='1';
+    }, { passive:true });
+    (function loop(){
+      cx += (gx-cx)*0.08;
+      cy += (gy-cy)*0.08;
+      glow.style.left = cx+'px';
+      glow.style.top  = cy+'px';
+      requestAnimationFrame(loop);
+    })();
+  }
+})();
+</script>
+</body>
+</html>
