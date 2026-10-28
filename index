@@ -292,7 +292,7 @@ const SITE_DATA = {
   /* ---------- 1. 基础身份（首页头部）---------- */
   profile: {
     name: "Song Meiqi",
-    photo: "images/me.jpg",
+    photo: "DSC06215.JPG",
     tagline: "工业设计｜CMF 设计师，专注消费电子质感设计",
     target: "意向岗位：CMF 设计师",
     email: "misty8868@qq.com",
